@@ -1,0 +1,26 @@
+{% if messages %}
+
+{% for message in messages %}
+<div id="message" class="container">
+    <div {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %} role="alert">
+        <button type="button" class="close" data-dismiss="true"><span aria-hidden="true">&times;</span></button>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
+        {{message}}
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Define the delay in milliseconds before the alert automatically closes (e.g., 5000ms or 5 seconds).
+        var autoCloseDelay = 5000;
+
+        // Find the alert element
+        var alertElement = $(".alert");
+
+        // Set a timeout to close the alert after the specified delay
+        setTimeout(function () {
+            alertElement.alert('close'); // Close the alert
+        }, autoCloseDelay);
+    });
+</script>
+{% endfor %}
+{% endif %}
